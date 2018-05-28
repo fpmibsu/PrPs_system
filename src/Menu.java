@@ -2,9 +2,23 @@ import java.util.Scanner;
 
 public class Menu {
 
+    private static DBWrapper database;
+
     enum UserType {
         administrator,
         user
+    }
+
+    enum ChangeInfoType {
+        delete,
+        update,
+        add
+    }
+
+    enum InfoType {
+        facult,
+        pulpit,
+        head
     }
 
     private static UserType getUserType() {
@@ -35,16 +49,36 @@ public class Menu {
             String input = scanner.nextLine();
             switch (input){
                 case "1":
+                    changeInformation(ChangeInfoType.add);
                     break;
                 case "2":
+                    changeInformation(ChangeInfoType.delete);
                     break;
                 case "3":
+                    changeInformation(ChangeInfoType.update);
                     break;
             }
             if ("0".equals(input)) {
                 break;
             }
         }
+    }
+
+    private static InfoType informationMenu() {
+        System.out.println("Информация: ");
+        System.out.println("[1] - фаукультет");
+        System.out.println("[2] - специальность");
+        System.out.println("[3] - декан");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+
+        return InfoType.values()[Integer.parseInt(input)-1];
+    }
+
+    private static void changeInformation(ChangeInfoType operationType) {
+        InfoType infoType = informationMenu();
+
+        database.operationWitInfo(operationType, infoType);
     }
 
     private static void userMenu() {
@@ -71,6 +105,9 @@ public class Menu {
 
 
     public static void main(String [] args) {
+
+        database = new DBWrapper();
+
         UserType userType = getUserType();
 
 
