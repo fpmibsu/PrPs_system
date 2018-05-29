@@ -85,16 +85,28 @@ public class Menu {
         while (true) {
             System.out.println("------абитуриент------");
             System.out.println("Выберите действие: ");
+            System.out.println("[1] - список спеуиальностей и план приема");
+            System.out.println("[2] - наименование специальностей, с макс балом по матиматике");
+            System.out.println("[3] - список руковадителей ");
             System.out.println("[0] - выход");
 
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
+            System.out.println("Введите интерес год");
+            String year= scanner.nextLine();
             switch (input){
                 case "1":
+                    System.out.println("Форма обучкения дневна?");
+                    String isDaily = scanner.nextLine();
+
+                    database.getSpecialitiesWithPlan(year,
+                            ("Да".equals(isDaily) ? Boolean.TRUE : Boolean.FALSE));
                     break;
                 case "2":
+                    database.getSpecialitiesWithMaxMathGrade(year);
                     break;
                 case "3":
+
                     break;
             }
             if ("0".equals(input)) {
