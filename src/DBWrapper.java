@@ -2,6 +2,7 @@ import Models.EducationUnit;
 import Models.FacultyInfo;
 import Models.HeadInfo;
 import Models.SpecialityInfo;
+import java.sql.*;
 
 public class DBWrapper {
     // class to fetch some info from bd
@@ -36,6 +37,19 @@ public class DBWrapper {
         EducationUnit[] rez = new EducationUnit[5];
 
         return rez;
+    }
+
+    public static void simple() {
+        Connection c = null;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+        System.out.println("Opened database successfully");
     }
 
 }
