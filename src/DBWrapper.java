@@ -4,8 +4,8 @@ public class DBWrapper {
     // class to fetch some info from bd
 
 
-    public void operationWitInfo(Menu.ChangeInfoType operationType,
-                                 Menu.InfoType infoType) {
+    public void operationWithHeadInfoInfo(Menu.ChangeInfoType operationType,
+                                          HeadInfo item) {
 
     }
 

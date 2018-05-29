@@ -78,7 +78,27 @@ public class Menu {
     private static void changeInformation(ChangeInfoType operationType) {
         InfoType infoType = informationMenu();
 
-        database.operationWitInfo(operationType, infoType);
+        Scanner scanner = new Scanner(System.in);
+
+        switch (infoType) {
+            case head:
+                System.out.println("Декан: ");
+                System.out.println("Введите ФИО: ");
+                String fio = scanner.nextLine();
+                System.out.println("Введите годы");
+                String years = scanner.nextLine();
+                System.out.println("Введите ученое завнпеи");
+                String degree = scanner.nextLine();
+                HeadInfo item = new HeadInfo(fio, years, degree);
+
+                database.operationWithHeadInfoInfo(operationType, item);
+                break;
+            case facult:
+                break;
+            case pulpit:
+                break;
+        }
+
     }
 
     private static void userMenu() {
@@ -101,12 +121,13 @@ public class Menu {
 
                     database.getSpecialitiesWithPlan(year,
                             ("Да".equals(isDaily) ? Boolean.TRUE : Boolean.FALSE));
+
                     break;
                 case "2":
                     database.getSpecialitiesWithMaxMathGrade(year);
                     break;
                 case "3":
-
+                    database.getHeadsOfEducationUnit();
                     break;
             }
             if ("0".equals(input)) {
