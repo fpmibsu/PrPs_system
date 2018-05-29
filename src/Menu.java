@@ -1,3 +1,5 @@
+import Models.HeadInfo;
+
 import java.util.Scanner;
 
 public class Menu {
@@ -94,8 +96,12 @@ public class Menu {
                 database.operationWithHeadInfoInfo(operationType, item);
                 break;
             case facult:
+
+
                 break;
             case pulpit:
+
+
                 break;
         }
 

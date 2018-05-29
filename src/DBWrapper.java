@@ -1,4 +1,7 @@
-import java.lang.reflect.Array;
+import Models.EducationUnit;
+import Models.FacultyInfo;
+import Models.HeadInfo;
+import Models.SpecialityInfo;
 
 public class DBWrapper {
     // class to fetch some info from bd

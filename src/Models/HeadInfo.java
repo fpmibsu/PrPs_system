@@ -1,3 +1,5 @@
+package Models;
+
 public class HeadInfo {
 
     private String fio;
