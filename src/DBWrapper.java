@@ -123,7 +123,29 @@ public class DBWrapper {
                                         String facultyName) {
         switch(operationType){
             case update:{
-
+                Connection c = null;
+                Statement stmt = null;
+                try {
+                    Class.forName("org.sqlite.JDBC");
+                    c = DriverManager.getConnection("jdbc:sqlite:db.db");
+                    c.setAutoCommit(false);
+                    stmt = c.createStatement();
+                    String sql = "UPDATE ";
+                    if (infoType == Menu.InfoType.facult){
+                        sql += "Faculty";
+                    } else {
+                        sql += "Pulpit";
+                    }
+                    sql += " set Address = '" + address + "', Phone = '" + telephone + "', WebSite = '" + site + "'" +
+                            " WHERE Name = '" + name + "';";
+                    stmt.executeUpdate(sql);
+                    c.commit();
+                    stmt.close();
+                    c.close();
+                } catch ( Exception e ) {
+                    System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+                    return false;
+                }
                 break;
             }
             case add: {
