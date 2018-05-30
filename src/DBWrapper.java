@@ -50,9 +50,26 @@ public class DBWrapper {
                 break;
             }
             case delete: {
+
                 break;
             }
             case update:{
+                Connection c = null;
+                Statement stmt = null;
+                try {
+                    Class.forName("org.sqlite.JDBC");
+                    c = DriverManager.getConnection("jdbc:sqlite:db.db");
+                    c.setAutoCommit(true);
+                    stmt = c.createStatement();
+                    String sqlUpdate = "UPDATE Deans set AcademicDegree = '" + item.getDegree() + "' where FIO = '" +
+                            item.getFIO() + "';";
+                    stmt.executeUpdate(sqlUpdate);
+                    stmt.close();
+                    c.close();
+                } catch ( Exception e ) {
+                    System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+                    System.exit(0);
+                }
                 break;
             }
         }
