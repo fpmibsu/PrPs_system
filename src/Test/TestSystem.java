@@ -6,8 +6,19 @@ public class TestSystem extends Assert {
 
     @Test
     public void TestPulpit() {
-        EducationUnit item = new EducationUnit();
-        assertTrue()
+
+        HeadInfo[] heads = HeadInfo[4];
+        SpecialityInfo[] specs = SpecialityInfo[4];
+
+        EducationUnit item = new EducationUnit(12,
+        "Test",
+        "T",
+        heads,
+        specs,
+        "address",
+        "telephone",
+        "site");
+        assertEquals(item.getHeads(), heads, "The heads the same");
     }
 
     @Test
