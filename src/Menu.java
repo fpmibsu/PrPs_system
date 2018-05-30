@@ -152,7 +152,7 @@ public class Menu {
                     }
                     break;
                 case "3":
-                    database.getHeadsOfEducationUnit();
+                    //database.getHeadsOfEducationUnit();
                     break;
             }
             if ("0".equals(input)) {
