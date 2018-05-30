@@ -30,13 +30,6 @@ public class DBWrapper {
         return specialityInfo;
     }
 
-    public FacultyInfo[] getFacultiesInfo() {
-
-        FacultyInfo[] facult = new FacultyInfo[5];
-
-        return facult;
-    }
-
     public ArrayList<SpecialityInfo> getSpecialitiesWithMaxMathGrade(String year) {
         ArrayList<SpecialityInfo>  rez = new ArrayList<>();
         Connection c = null;
@@ -64,7 +57,6 @@ public class DBWrapper {
         }
         return rez;
     }
-
 
     public ArrayList<PlanInfo> getSpecialitiesWithPlan(String year, Boolean isDaily) {
         ArrayList<PlanInfo>  rez = new ArrayList<>();
@@ -95,23 +87,37 @@ public class DBWrapper {
         return rez;
     }
 
-    public EducationUnit[] getHeadsOfEducationUnit() {
-        EducationUnit[] rez = new EducationUnit[5];
-
-        return rez;
-    }
-
-    public static void simple() {
+    public ArrayList<HeadInfo> getHeadsOfEducationUnit(String year) {
+        ArrayList<HeadInfo> rez = new ArrayList<>();
         Connection c = null;
-
+        Statement stmt = null;
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c = DriverManager.getConnection("jdbc:sqlite:db.db");
+            c.setAutoCommit(false);
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery( "SELECT *  FROM Deans WHERE AcademicDegree ='PhD'" +
+                    "AND StartDate <=" + year + " AND (EndDate >= " + year + " OR EndDate is NULL) ");
+            while (rs.next()) {
+                String fio = rs.getString("FIO");
+                String years = "from: " + rs.getString("StartDate") + " to: ";
+                String end = rs.getString("EndDate");
+                if (end != null){
+                    years += end;
+                } else {
+                    years += "now";
+                }
+                rez.add(new HeadInfo(fio, "PhD", years));
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
-        System.out.println("Opened database successfully");
+        return rez;
     }
 
 }
