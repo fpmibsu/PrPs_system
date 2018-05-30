@@ -25,7 +25,7 @@ public class TestSystem extends Assert {
 
     @Test
     public void HeadInfo() {
-        HeadInfo head = new HeadInfo("fio", "PhD", "2015");
+        HeadInfo head = new HeadInfo("fio", "PhD", "2015", null);
 
         assertEquals("The fio the same","fio",  head.getFIO());
         assertEquals("The degree the same", "PhD", head.getDegree() );

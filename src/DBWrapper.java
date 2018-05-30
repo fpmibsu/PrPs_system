@@ -1,6 +1,8 @@
 import Models.*;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class DBWrapper {
@@ -13,6 +15,47 @@ public class DBWrapper {
 
     public Boolean operationWithHeadInfo(Menu.ChangeInfoType operationType,
                                           HeadInfo item) {
+        switch(operationType){
+            case add:{
+                Connection c = null;
+                Statement stmt = null;
+                try {
+                    int ID = -1;
+                    Class.forName("org.sqlite.JDBC");
+                    c = DriverManager.getConnection("jdbc:sqlite:db.db");
+                    c.setAutoCommit(true);
+                    stmt = c.createStatement();
+                    ResultSet rs = stmt.executeQuery( "select ID from Faculty WHERE NAME = '" + item.getFaculty() +
+                            "' collate nocase;");
+                    while (rs.next()) {
+                        ID = rs.getInt("ID");
+                    }
+                    rs.close();
+                    if (ID != -1){
+                        int year = LocalDate.now().getYear();
+                        String sqlUpdate = "UPDATE Deans set EndDate = '" + year + "' where FacID = " + ID + ";";
+                        stmt.executeUpdate(sqlUpdate);
+                        String sql = "INSERT INTO Deans (FIO,StartDate,AcademicDegree, FacID) VALUES('" +
+                                item.getFIO() + "','" + year +
+                                "','" + item.getDegree() + "','" + ID + "');";
+                        stmt.executeUpdate(sql);
+                    }
+                    stmt.close();
+                    c.close();
+
+                } catch ( Exception e ) {
+                    System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+                    System.exit(0);
+                }
+                break;
+            }
+            case delete: {
+                break;
+            }
+            case update:{
+                break;
+            }
+        }
         return true;
     }
 
@@ -121,7 +164,7 @@ public class DBWrapper {
                 } else {
                     years += "now";
                 }
-                rez.add(new HeadInfo(fio, "PhD", years));
+                rez.add(new HeadInfo(fio, "PhD", years, null));
             }
             rs.close();
             stmt.close();

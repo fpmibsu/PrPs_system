@@ -1,5 +1,6 @@
 import Models.*;
 
+import java.nio.file.OpenOption;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -104,7 +105,9 @@ public class Menu {
                         String years = scanner.nextLine();
                         System.out.println("Введите ученое завнпеи");
                         String degree = scanner.nextLine();
-                        HeadInfo item = new HeadInfo(fio, years, degree);
+                        System.out.println("Введите факультет: ");
+                        String fuc = scanner.nextLine();
+                        HeadInfo item = new HeadInfo(fio, years, degree, fuc);
 
                         database.operationWithHeadInfo(operationType, item);
                         break;
