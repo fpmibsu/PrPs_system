@@ -187,8 +187,7 @@ public class Menu {
             case administrator:
                 administratorMenu();
                 break;
-            default:
-                return;
+
         }
     }
 
