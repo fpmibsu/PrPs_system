@@ -42,25 +42,34 @@ public class DBWrapper {
         return true;
     }
 
+    private int getFacultyID(String facultyName, Statement stmt){
+        int ID = -1;
+        try {
+            ResultSet rs = stmt.executeQuery( "select ID from Faculty WHERE NAME = '" + facultyName +
+                    "' collate nocase;");
+            while (rs.next()) {
+                ID = rs.getInt("ID");
+            }
+            rs.close();
+        } catch(Exception e){
+
+        }
+        return ID;
+    }
 
     public Boolean operationWithHeadInfo(Menu.ChangeInfoType operationType,
                                           HeadInfo item) {
         switch(operationType){
             case add:{
+                int ID = -1;
                 Connection c = null;
                 Statement stmt = null;
                 try {
-                    int ID = -1;
                     Class.forName("org.sqlite.JDBC");
                     c = DriverManager.getConnection("jdbc:sqlite:db.db");
                     c.setAutoCommit(true);
                     stmt = c.createStatement();
-                    ResultSet rs = stmt.executeQuery( "select ID from Faculty WHERE NAME = '" + item.getFaculty() +
-                            "' collate nocase;");
-                    while (rs.next()) {
-                        ID = rs.getInt("ID");
-                    }
-                    rs.close();
+                    ID = getFacultyID(item.getFaculty(), stmt);
                     if (ID != -1){
                         int year = LocalDate.now().getYear();
                         String sqlUpdate = "UPDATE Deans set EndDate = '" + year + "' where FacID = " + ID + ";";
@@ -72,9 +81,11 @@ public class DBWrapper {
                     }
                     stmt.close();
                     c.close();
-
                 } catch ( Exception e ) {
                     System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+                    return false;
+                }
+                if (ID == -1){
                     return false;
                 }
                 break;
@@ -108,7 +119,60 @@ public class DBWrapper {
                                         String shortName,
                                         String address,
                                         String telephone,
-                                        String site) {
+                                        String site,
+                                        String facultyName) {
+        switch(operationType){
+            case update:{
+
+                break;
+            }
+            case add: {
+                int ID = -1;
+                Connection c = null;
+                Statement stmt = null;
+                try {
+                    Class.forName("org.sqlite.JDBC");
+                    c = DriverManager.getConnection("jdbc:sqlite:db.db");
+                    c.setAutoCommit(false);
+                    stmt = c.createStatement();
+                    if(infoType != Menu.InfoType.facult){
+                        ID = getFacultyID(facultyName, stmt);
+                    } else {
+                        ID = 0;
+                    }
+                    if (ID != -1){
+                        String sql = null;
+                        if (infoType == Menu.InfoType.facult){
+                            sql = "INSERT INTO Faculty (Address,WebSite,Name,ShortName,Phone) VALUES(?,?,?,?,?);";
+                        }
+                        else {
+                            sql = "INSERT INTO Pulpit (Address,WebSite, Name, ShortName, Phone, FacID) VALUES(?,?,?,?,?,?);";
+                        }
+                        PreparedStatement preparedStatement = c.prepareStatement(sql);
+                        preparedStatement.setString(1, address);
+                        preparedStatement.setString(2, site);
+                        preparedStatement.setString(3, name);
+                        preparedStatement.setString(4, shortName);
+                        preparedStatement.setString(5, telephone);
+                        if (infoType == Menu.InfoType.pulpit){
+                            preparedStatement.setInt(6, ID);
+                        }
+                        preparedStatement.executeUpdate();
+
+                        c.commit();
+                    }
+                    stmt.close();
+                    c.close();
+                } catch ( Exception e ) {
+                    System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+                    return false;
+                }
+                if (ID == -1){
+                    return false;
+                }
+                break;
+            }
+        }
 
         return true;
     }
