@@ -1,23 +1,13 @@
 package Test;
+package Models;
 import org.junit.*;
 
 public class TestSystem extends Assert {
 
-    /*
-    @Before
-    public void init() { math = new MathFunc(); }
-    @After
-    public void tearDown() { math = null; }
-
     @Test
-    public void calls() {
-        assertEquals(0, math.getCalls());
-
-        math.factorial(1);
-        assertEquals(1, math.getCalls());
-
-        math.factorial(1);
-        assertEquals(2, math.getCalls());
+    public void TestPulpit() {
+        EducationUnit item = new EducationUnit();
+        assertTrue()
     }
 
     @Test
@@ -27,16 +17,10 @@ public class TestSystem extends Assert {
         assertTrue(math.factorial(5) == 120);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void factorialNegative() {
-        math.factorial(-1);
-    }
-
     @Ignore
     @Test
     public void todo() {
         assertTrue(math.plus(1, 1) == 3);
     }
-    */
 
 }
