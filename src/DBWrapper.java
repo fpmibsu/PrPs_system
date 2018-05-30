@@ -8,7 +8,37 @@ import java.util.ArrayList;
 public class DBWrapper {
     // class to fetch some info from bd
 
+    private String getTableNameByInfoType(Menu.InfoType type){
+        switch(type){
+            case facult:{
+                return "Faculty";
+            }
+            case head: {
+                return "Deans";
+            }
+            default: {
+                return "Pulpit";
+            }
+        }
+    }
+
     public Boolean deleteSomeInfo(String code, Menu.InfoType type) {
+        String sql = "DELETE FROM ";
+        sql += getTableNameByInfoType(type) + " WHERE ID = " + code + ";";
+        Connection c = null;
+        Statement stmt = null;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:db.db");
+            c.setAutoCommit(true);
+            stmt = c.createStatement();
+            stmt.executeUpdate(sql);
+            stmt.close();
+            c.close();
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            return false;
+        }
         return true;
     }
 
@@ -45,12 +75,8 @@ public class DBWrapper {
 
                 } catch ( Exception e ) {
                     System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-                    System.exit(0);
+                    return false;
                 }
-                break;
-            }
-            case delete: {
-
                 break;
             }
             case update:{
@@ -68,7 +94,7 @@ public class DBWrapper {
                     c.close();
                 } catch ( Exception e ) {
                     System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-                    System.exit(0);
+                    return false;
                 }
                 break;
             }
