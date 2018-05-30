@@ -109,6 +109,7 @@ public class DBWrapper {
                                         String address,
                                         String telephone,
                                         String site) {
+
         return true;
     }
 
@@ -197,7 +198,7 @@ public class DBWrapper {
             c.setAutoCommit(false);
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery( "SELECT *  FROM Deans WHERE AcademicDegree ='PhD'" +
-                    "AND StartDate <=" + year + " AND (EndDate >= " + year + " OR EndDate is NULL) ");
+                    "AND StartDate >=" + year + " AND (EndDate <= " + year + " OR EndDate is NULL) ");
             while (rs.next()) {
                 String fio = rs.getString("FIO");
                 String years = "from: " + rs.getString("StartDate") + " to: ";
