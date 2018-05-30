@@ -10,7 +10,9 @@ public class Menu {
 
     enum UserType {
         administrator,
-        user
+        user,
+        nothing,
+        exit
     }
 
     enum ChangeInfoType {
@@ -29,14 +31,20 @@ public class Menu {
         System.out.println("Выберите тип пользователя: ");
         System.out.println("[1] - администратор");
         System.out.println("[2] - абитуриент");
+        System.out.println("[0] - выход");
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
         if ("1".equals(input)) {
             return UserType.administrator;
+        } else if ("2".equals(input)) {
+            return UserType.user;
         }
-        return UserType.user;
+        else if ("0".equals(input)) {
+            return UserType.exit;
+        }
+        return UserType.nothing;
     }
 
     private static void administratorMenu() {
@@ -248,17 +256,21 @@ public class Menu {
 
         database = new DBWrapper();
 
-        UserType userType = getUserType();
+        while (true) {
+
+            UserType userType = getUserType();
 
 
-        switch (userType) {
-            case user:
-                userMenu();
-                break;
-            case administrator:
-                administratorMenu();
-                break;
-
+            switch (userType) {
+                case user:
+                    userMenu();
+                    break;
+                case administrator:
+                    administratorMenu();
+                    break;
+                case exit:
+                    return;
+            }
         }
     }
 
