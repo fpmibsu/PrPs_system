@@ -14,5 +14,17 @@ public class HeadInfo {
         this.years = years;
     }
 
+    public String getFIO() {
+        return this.fio;
+    }
+
+    public String getDegree() {
+        return this.degree;
+    }
+
+    public String getYears() {
+        return this.years;
+    }
+
 }
 
