@@ -22,16 +22,17 @@ public class TestSystem extends Assert {
     }
 
     @Test
-    public void factorial() {
-        assertTrue(math.factorial(0) == 1);
-        assertTrue(math.factorial(1) == 1);
-        assertTrue(math.factorial(5) == 120);
+    public void HeadInfo() {
+        HeadInfo heads = HeadInfo("fio", "PhD", "2015");
+        assertEquals(item.getFIO(), "fio", "The fio the same");
+        assertEquals(item.getDegree(), "PhD", "The degree the same");
+        assertEquals(item.getYears(), "2015", "The years the same");
     }
 
     @Ignore
     @Test
     public void todo() {
-        assertTrue(math.plus(1, 1) == 3);
+        
     }
 
 }
