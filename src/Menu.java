@@ -1,5 +1,6 @@
 import Models.HeadInfo;
 import Models.PlanInfo;
+import Models.SpecialityInfo;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -130,13 +131,25 @@ public class Menu {
                     ArrayList<PlanInfo> planInfos = database.getSpecialitiesWithPlan(year,
                             ("Да".equals(isDaily) ? Boolean.TRUE : Boolean.FALSE));
 
+                    if (planInfos.isEmpty()) {
+                        System.out.println("Ничего не найдено");
+                    }
                     for (PlanInfo planInfo : planInfos) {
                         System.out.println("---------------------------");
                         System.out.println(planInfo);
                     }
                     break;
                 case "2":
-                    database.getSpecialitiesWithMaxMathGrade(year);
+                    ArrayList<SpecialityInfo> specs = database.getSpecialitiesWithMaxMathGrade(year);
+
+                    if (specs.isEmpty()) {
+                        System.out.println("Ничего не найдено");
+                    }
+                    for (SpecialityInfo spec : specs) {
+                        System.out.println("---------------------------");
+                        System.out.println("Специальность:");
+                        System.out.println(spec);
+                    }
                     break;
                 case "3":
                     database.getHeadsOfEducationUnit();
