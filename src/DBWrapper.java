@@ -30,13 +30,6 @@ public class DBWrapper {
         return specialityInfo;
     }
 
-    public FacultyInfo[] getFacultiesInfo() {
-
-        FacultyInfo[] facult = new FacultyInfo[5];
-
-        return facult;
-    }
-
     public ArrayList<SpecialityInfo> getSpecialitiesWithMaxMathGrade(String year) {
         ArrayList<SpecialityInfo>  rez = new ArrayList<>();
         Connection c = null;
@@ -125,19 +118,6 @@ public class DBWrapper {
             System.exit(0);
         }
         return rez;
-    }
-
-    public static void simple() {
-        Connection c = null;
-
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
-        } catch ( Exception e ) {
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-            System.exit(0);
-        }
-        System.out.println("Opened database successfully");
     }
 
 }
