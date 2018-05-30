@@ -50,7 +50,7 @@ public class Menu {
 
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
-            switch (input){
+            switch (input) {
                 case "1":
                     changeInformation(ChangeInfoType.add);
                     break;
@@ -70,12 +70,12 @@ public class Menu {
     private static InfoType informationMenu() {
         System.out.println("Информация: ");
         System.out.println("[1] - фаукультет");
-        System.out.println("[2] - специальность");
+        System.out.println("[2] - кафедра");
         System.out.println("[3] - декан");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
-        return InfoType.values()[Integer.parseInt(input)-1];
+        return InfoType.values()[Integer.parseInt(input) - 1];
     }
 
     private static void changeInformation(ChangeInfoType operationType) {
@@ -139,13 +139,35 @@ public class Menu {
                         System.out.println("Введите сайт");
                         String site = scanner.nextLine();
 
+                        if (infoType == InfoType.facult) {
+                            result = database.operationWithEducUnit(operationType,
+                                    infoType,
+                                    name,
+                                    shortName,
+                                    address,
+                                    telephone,
+                                    site,
+                                    null);
+
+                            if (result) {
+                                System.out.println("успешно!");
+                            } else {
+                                System.out.println("Ошибка!");
+                            }
+                            break;
+                        }
+
+                        System.out.println("Введите название факультета");
+                        String facultyName = scanner.nextLine();
+
                         result = database.operationWithEducUnit(operationType,
                                 infoType,
                                 name,
                                 shortName,
                                 address,
                                 telephone,
-                                site);
+                                site,
+                                facultyName);
 
                         if (result) {
                             System.out.println("успешно!");
@@ -179,7 +201,7 @@ public class Menu {
 
             System.out.println("Введите интерес год");
             String year = scanner.nextLine();
-            switch (input){
+            switch (input) {
                 case "1":
                     System.out.println("Форма обучкения дневна?");
                     String isDaily = scanner.nextLine();
@@ -224,7 +246,7 @@ public class Menu {
     }
 
 
-    public static void main(String [] args) {
+    public static void main(String[] args) {
 
         database = new DBWrapper();
 
