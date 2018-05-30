@@ -121,6 +121,11 @@ public class Menu {
 
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
+
+            if ("0".equals(input)) {
+                break;
+            }
+
             System.out.println("Введите интерес год");
             String year = scanner.nextLine();
             switch (input){
@@ -163,9 +168,7 @@ public class Menu {
                     }
                     break;
             }
-            if ("0".equals(input)) {
-                break;
-            }
+
         }
     }
 
@@ -184,6 +187,8 @@ public class Menu {
             case administrator:
                 administratorMenu();
                 break;
+            default:
+                return;
         }
     }
 
