@@ -28,4 +28,9 @@ public class EducationUnit {
         this.telephone = telephone;
         this.site = site;
     }
+
+    public HeadInfo[] getHeads() {
+        return this.heads;
+    }
+
 }
