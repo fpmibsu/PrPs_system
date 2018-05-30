@@ -25,4 +25,12 @@ public class PlanInfo {
         this.isDaily = isDaily;
         this.specialityInfo = specialityInfo;
     }
+
+    public String toString() {
+        return "План приема на специальность: " + this.numberOfStudents +
+                "\nГод: " + this.year +
+                "\nФорма обучения: " + (this.isDaily ? "дневная" : "заочная") +
+                "\nСпециальность: \n" + this.specialityInfo;
+    }
+
 }

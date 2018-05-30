@@ -13,5 +13,12 @@ public class SpecialityInfo {
         this.name = name;
         this.shortName = shortName;
     }
+
+    public String toString() {
+        return "\tКод: " + this.code +
+                "\n\tНазвание: " + this.name +
+                "\n\tКороткое название: " + this.shortName;
+    }
+
 }
 
