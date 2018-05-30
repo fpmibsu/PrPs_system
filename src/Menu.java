@@ -110,6 +110,15 @@ public class Menu {
                         HeadInfo item = new HeadInfo(fio, years, degree, fuc);
 
                         database.operationWithHeadInfo(operationType, item);
+
+                        Boolean result = database.operationWithHeadInfo(operationType, item);
+
+                        if (result) {
+                            System.out.println("успешно!");
+                        } else {
+                            System.out.println("Ошибка!");
+                        }
+
                         break;
                     case facult:
                     case pulpit:
@@ -130,7 +139,7 @@ public class Menu {
                         System.out.println("Введите сайт");
                         String site = scanner.nextLine();
 
-                        Boolean result = database.operationWithEducUnit(operationType,
+                        result = database.operationWithEducUnit(operationType,
                                 infoType,
                                 name,
                                 shortName,
