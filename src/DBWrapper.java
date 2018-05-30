@@ -6,10 +6,24 @@ import java.util.ArrayList;
 public class DBWrapper {
     // class to fetch some info from bd
 
+    public Boolean deleteSomeInfo(String code, Menu.InfoType type) {
+        return true;
+    }
 
-    public void operationWithHeadInfoInfo(Menu.ChangeInfoType operationType,
+
+    public Boolean operationWithHeadInfo(Menu.ChangeInfoType operationType,
                                           HeadInfo item) {
+        return true;
+    }
 
+    public Boolean operationWithEducUnit(Menu.ChangeInfoType operationType,
+                                        Menu.InfoType  infoType,
+                                        String name,
+                                        String shortName,
+                                        String address,
+                                        String telephone,
+                                        String site) {
+        return true;
     }
 
     private SpecialityInfo getSpecialityInfo(Connection c, int speID){

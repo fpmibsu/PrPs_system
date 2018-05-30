@@ -1,6 +1,4 @@
-import Models.HeadInfo;
-import Models.PlanInfo;
-import Models.SpecialityInfo;
+import Models.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -39,7 +37,6 @@ public class Menu {
         }
         return UserType.user;
     }
-
 
     private static void administratorMenu() {
         while (true) {
@@ -85,28 +82,70 @@ public class Menu {
 
         Scanner scanner = new Scanner(System.in);
 
-        switch (infoType) {
-            case head:
-                System.out.println("Декан: ");
-                System.out.println("Введите ФИО: ");
-                String fio = scanner.nextLine();
-                System.out.println("Введите годы");
-                String years = scanner.nextLine();
-                System.out.println("Введите ученое завнпеи");
-                String degree = scanner.nextLine();
-                HeadInfo item = new HeadInfo(fio, years, degree);
+        switch (operationType) {
+            case delete:
+                System.out.println("Введите код на удаление");
+                String code = scanner.nextLine();
 
-                database.operationWithHeadInfoInfo(operationType, item);
+                if (database.deleteSomeInfo(code, infoType)) {
+                    System.out.println("успешно удалено!");
+                } else {
+                    System.out.println("Ошибка!");
+                }
                 break;
-            case facult:
+            case update:
+            case add:
+                switch (infoType) {
+                    case head:
+                        System.out.println("Декан: ");
+                        System.out.println("Введите ФИО: ");
+                        String fio = scanner.nextLine();
+                        System.out.println("Введите годы");
+                        String years = scanner.nextLine();
+                        System.out.println("Введите ученое завнпеи");
+                        String degree = scanner.nextLine();
+                        HeadInfo item = new HeadInfo(fio, years, degree);
 
+                        database.operationWithHeadInfo(operationType, item);
+                        break;
+                    case facult:
+                    case pulpit:
+                        System.out.println((infoType == InfoType.facult ? "Факультет: " : "Кафедра:"));
 
-                break;
-            case pulpit:
+                        System.out.println("Введите название: ");
+                        String name = scanner.nextLine();
 
+                        System.out.println("Введите кортокое название");
+                        String shortName = scanner.nextLine();
 
+                        System.out.println("Введите адрес: ");
+                        String address = scanner.nextLine();
+
+                        System.out.println("Введите телефон");
+                        String telephone = scanner.nextLine();
+
+                        System.out.println("Введите сайт");
+                        String site = scanner.nextLine();
+
+                        Boolean result = database.operationWithEducUnit(operationType,
+                                infoType,
+                                name,
+                                shortName,
+                                address,
+                                telephone,
+                                site);
+
+                        if (result) {
+                            System.out.println("успешно!");
+                        } else {
+                            System.out.println("Ошибка!");
+                        }
+
+                        break;
+                }
                 break;
         }
+
 
     }
 
