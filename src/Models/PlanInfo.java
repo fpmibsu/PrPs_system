@@ -12,16 +12,17 @@ public class PlanInfo {
     }
 
     private int numberOfStudents;
-    private subjects[] subjectsToPass;
-    private int scoreToPass;
-
+    private String year;
+    private Boolean isDaily;
+    private SpecialityInfo specialityInfo;
 
     public PlanInfo(int numberOfStudents,
-            subjects[] subjectsToPass,
-            int scoreToPass) {
+                    String year,
+                    Boolean isDaily,
+                    SpecialityInfo specialityInfo) {
         this.numberOfStudents = numberOfStudents;
-        this.subjectsToPass = subjectsToPass;
-        this.scoreToPass = scoreToPass;
-
+        this.year = year;
+        this.isDaily = isDaily;
+        this.specialityInfo = specialityInfo;
     }
 }

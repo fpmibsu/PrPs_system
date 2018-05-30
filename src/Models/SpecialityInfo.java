@@ -6,17 +6,12 @@ public class SpecialityInfo {
     private String name;
     private String shortName;
 
-    private Boolean isDaily;
-
     public SpecialityInfo(int code,
                           String name,
-                          String shortName,
-                          Boolean isDaily) {
+                          String shortName) {
         this.code = code;
         this.name = name;
         this.shortName = shortName;
-        this.isDaily = isDaily;
-
     }
 }
 
