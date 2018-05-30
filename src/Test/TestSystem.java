@@ -1,5 +1,7 @@
 package Test;
-package Models;
+
+import Models.EducationUnit;
+import Models.*;
 import org.junit.*;
 
 public class TestSystem extends Assert {
@@ -13,27 +15,27 @@ public class TestSystem extends Assert {
         EducationUnit item = new EducationUnit(12,
         "Test",
         "T",
-        heads,
-        specs,
+                heads,
+                specs,
         "address",
         "telephone",
         "site");
-        assertEquals(item.getHeads(), heads, "The heads the same");
+        assertTrue("The heads the same", item.getHeads().equals(heads));
     }
 
     @Test
     public void HeadInfo() {
-        HeadInfo heads = new HeadInfo("fio", "PhD", "2015");
-        assertEquals(item.getFIO(), "fio", "The fio the same");
-        assertEquals(item.getDegree(), "PhD", "The degree the same");
-        assertEquals(item.getYears(), "2015", "The years the same");
+        HeadInfo head = new HeadInfo("fio", "PhD", "2015");
+
+        assertEquals("The fio the same","fio",  head.getFIO());
+        assertEquals("The degree the same", "PhD", head.getDegree() );
+        assertEquals("The years the same","2015",  head.getYears());
     }
 
     @Test
     public void TestFaculties() {
         FacultyInfo[] tt =  new FacultyInfo[3];
-
-        assertEquals(tt), new FacultyInfo[3];, "The Faculties the same");
+        assertTrue("The Faculties the same", tt.equals(tt));
     }
 
     @Ignore
