@@ -101,13 +101,11 @@ public class Menu {
                         System.out.println("Декан: ");
                         System.out.println("Введите ФИО: ");
                         String fio = scanner.nextLine();
-                        System.out.println("Введите годы");
-                        String years = scanner.nextLine();
                         System.out.println("Введите ученое завнпеи");
                         String degree = scanner.nextLine();
                         System.out.println("Введите факультет: ");
                         String fuc = scanner.nextLine();
-                        HeadInfo item = new HeadInfo(fio, years, degree, fuc);
+                        HeadInfo item = new HeadInfo(fio, degree, null, fuc);
 
                         database.operationWithHeadInfo(operationType, item);
 
