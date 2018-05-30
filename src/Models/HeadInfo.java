@@ -26,5 +26,12 @@ public class HeadInfo {
         return this.years;
     }
 
+
+    public String toString() {
+        return "\tФИО: " + this.fio +
+                "\n\tУченая степпень: " + this.degree +
+                "\n\tГоды: " + this.years;
+    }
+
 }
 

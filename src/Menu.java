@@ -152,7 +152,15 @@ public class Menu {
                     }
                     break;
                 case "3":
-                    //database.getHeadsOfEducationUnit();
+                    ArrayList<HeadInfo> heads = database.getHeadsOfEducationUnit(year);
+                    if (heads.isEmpty()) {
+                        System.out.println("Ничего не найдено");
+                    }
+                    for (HeadInfo head : heads) {
+                        System.out.println("---------------------------");
+                        System.out.println("Декан:");
+                        System.out.println(head);
+                    }
                     break;
             }
             if ("0".equals(input)) {
