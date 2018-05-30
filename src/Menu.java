@@ -1,5 +1,7 @@
 import Models.HeadInfo;
+import Models.PlanInfo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
@@ -119,15 +121,19 @@ public class Menu {
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
             System.out.println("Введите интерес год");
-            String year= scanner.nextLine();
+            String year = scanner.nextLine();
             switch (input){
                 case "1":
                     System.out.println("Форма обучкения дневна?");
                     String isDaily = scanner.nextLine();
 
-                    database.getSpecialitiesWithPlan(year,
+                    ArrayList<PlanInfo> planInfos = database.getSpecialitiesWithPlan(year,
                             ("Да".equals(isDaily) ? Boolean.TRUE : Boolean.FALSE));
 
+                    for (PlanInfo planInfo : planInfos) {
+                        System.out.println("---------------------------");
+                        System.out.println(planInfo);
+                    }
                     break;
                 case "2":
                     database.getSpecialitiesWithMaxMathGrade(year);
