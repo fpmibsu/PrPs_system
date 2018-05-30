@@ -7,6 +7,7 @@ public class EducationUnit {
     private String shortName;
     private HeadInfo[] heads;
     private SpecialityInfo[] spec;
+    private String address;
     private String telephone;
     private String site;
 
@@ -15,6 +16,7 @@ public class EducationUnit {
                          String shortName,
                          HeadInfo[] heads,
                          SpecialityInfo[] spec,
+                         String address,
                          String telephone,
                          String site) {
         this.code = code;
@@ -22,6 +24,7 @@ public class EducationUnit {
         this.shortName = shortName;
         this.heads = heads;
         this.spec = spec;
+        this.address = address;
         this.telephone = telephone;
         this.site = site;
     }
